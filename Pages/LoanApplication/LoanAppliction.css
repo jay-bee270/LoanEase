@@ -1,0 +1,330 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #333333;
+  background-color: #f9f9f9;
+  line-height: 1.5;
+}
+
+/* Loan Application Container */
+.loan-application {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.loan-application-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.loan-application-header h1 {
+  font-size: 2.5rem;
+  color: #45a049;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.loan-application-header p {
+  font-size: 1.1rem;
+  color: #666666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form Container */
+.loan-form-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Form Progress */
+.form-progress {
+  display: flex;
+  background-color: #f1f1f1;
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.progress-step {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  position: relative;
+}
+
+.progress-step.active {
+  font-weight: 500;
+  color: #45a049;
+}
+
+.progress-step.completed {
+  color: #45a049;
+}
+
+.progress-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #e0e0e0;
+  z-index: 1;
+}
+
+.progress-step.completed:not(:last-child)::after {
+  background-color: #45a049;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #666666;
+  margin-right: 8px;
+  z-index: 2;
+  position: relative;
+}
+
+.progress-step.active .step-number,
+.progress-step.completed .step-number {
+  background-color: #45a049;
+  color: #ffffff;
+}
+
+/* Form Content */
+.form-content {
+  padding: 32px;
+}
+
+.form-section {
+  margin-bottom: 32px;
+}
+
+.form-section h2 {
+  font-size: 1.5rem;
+  color: #45a049;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #666666;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #45a049;
+  box-shadow: 0 0 0 2px rgba(69, 160, 73, 0.2);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: #e74c3c;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Payment Calculator */
+.payment-calculator {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.payment-calculator h3 {
+  font-size: 1.25rem;
+  color: #45a049;
+  margin-bottom: 16px;
+}
+
+.calculator-result {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  margin-top: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.monthly-payment {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #45a049;
+  margin-bottom: 8px;
+}
+
+.payment-details {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.form-navigation button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-navigation button.back-btn {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+.form-navigation button.back-btn:hover {
+  background-color: #cccccc;
+}
+
+.form-navigation button.next-btn,
+.form-navigation button.submit-btn {
+  background-color: #45a049;
+  color: #ffffff;
+}
+
+.form-navigation button.next-btn:hover,
+.form-navigation button.submit-btn:hover {
+  background-color: #1a771f;
+}
+
+.form-navigation button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form Success */
+.form-success {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: #45a049;
+  margin-bottom: 24px;
+}
+
+.form-success h2 {
+  font-size: 2rem;
+  color: #45a049;
+  margin-bottom: 16px;
+}
+
+.form-success p {
+  font-size: 1.1rem;
+  color: #666666;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.form-success button {
+  padding: 12px 24px;
+  background-color: #45a049;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-success button:hover {
+  background-color: #1a771f;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .loan-application {
+    padding: 16px;
+  }
+
+  .loan-application-header h1 {
+    font-size: 2rem;
+  }
+
+  .form-content {
+    padding: 24px 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-navigation button {
+    width: 100%;
+  }
+
+  .progress-step span:not(.step-number) {
+    display: none;
+  }
+}
+

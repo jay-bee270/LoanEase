@@ -1,0 +1,565 @@
+/* Base styles */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Primary Colors - Teal-Green Professional Palette */
+  --primary-color: #2e8b57; /* Sea Green - Main brand color */
+  --primary-dark: #1e5d3a; /* Darker shade for hover states */
+  --primary-light: #5cab7d; /* Lighter shade for backgrounds and accents */
+  --primary-gradient: linear-gradient(135deg, #2e8b57 0%, #1e5d3a 100%);
+
+  /* Secondary Colors - Deep Blue tones */
+  --secondary-color: #34495e; /* Dark slate blue for secondary elements */
+  --secondary-light: #5d7793; /* Lighter blue for accents */
+  --secondary-dark: #243342; /* Darker blue for contrast */
+
+  /* Accent Colors - Amber tones */
+  --accent-color: #f39c12; /* Warm amber for CTAs and highlights */
+  --accent-light: #f8c471; /* Lighter amber for hover states */
+  --accent-dark: #d68910; /* Darker amber for pressed states */
+
+  /* Neutral Colors */
+  --text-color: #2c3e50; /* Dark blue-gray for main text */
+  --text-light: #5d6d7e; /* Lighter text for secondary content */
+  --background-color: #f9fbfc; /* Very light blue-gray for main background */
+  --white: #ffffff;
+  --gray-light: #eff3f8; /* Light blue-gray for section backgrounds */
+  --gray: #d5dbdb; /* Medium gray for borders */
+
+  /* Success/Error Colors */
+  --success-color: #27ae60; /* Green for success messages */
+  --error-color: #e74c3c; /* Red for error messages */
+  --warning-color: #f39c12; /* Amber for warnings */
+  --info-color: #3498db; /* Blue for information */
+
+  /* Shadow Colors */
+  --shadow-sm: 0 2px 8px rgba(44, 62, 80, 0.05);
+  --shadow: 0 8px 30px rgba(44, 62, 80, 0.08);
+  --shadow-lg: 0 12px 40px rgba(44, 62, 80, 0.12);
+  --shadow-primary: 0 8px 20px rgba(46, 139, 87, 0.25);
+  --shadow-accent: 0 8px 20px rgba(243, 156, 18, 0.25);
+
+  /* Border Radius */
+  --border-radius-sm: 8px;
+  --border-radius: 12px;
+  --border-radius-lg: 24px;
+
+  /* Transitions */
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Loan Application Container */
+.loan-application {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-bottom: 16px;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--primary-dark);
+}
+
+.back-arrow {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+/* Update the header to accommodate the back link */
+.loan-application-header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.loan-application-header .back-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.loan-application-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.loan-application-header p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form Container */
+.loan-form-container {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Currency Settings Section */
+.currency-settings {
+  background-color: var(--gray-light);
+  padding: 20px;
+  margin-bottom: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.currency-settings h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.currency-settings p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.currency-settings .currency-selector-full {
+  max-width: 400px;
+}
+
+/* Form Progress */
+.form-progress {
+  display: flex;
+  background-color: var(--gray-light);
+  padding: 16px;
+  border-bottom: 1px solid var(--gray);
+  position: relative;
+}
+
+.progress-step {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  position: relative;
+}
+
+.progress-step.active {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.progress-step.completed {
+  color: var(--primary-color);
+}
+
+.progress-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--gray);
+  z-index: 1;
+}
+
+.progress-step.completed:not(:last-child)::after {
+  background-color: var(--primary-color);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--gray);
+  color: var(--text-light);
+  margin-right: 8px;
+  z-index: 2;
+  position: relative;
+}
+
+.progress-step.active .step-number,
+.progress-step.completed .step-number {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Form Content */
+.form-content {
+  padding: 32px;
+}
+
+.form-section {
+  margin-bottom: 32px;
+}
+
+.form-section h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-light);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  transition: var(--transition);
+  color: var(--text-color);
+  background-color: var(--white);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.2);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Payment Calculator */
+.payment-calculator {
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius-sm);
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+.payment-calculator h3 {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.calculator-result {
+  background-color: var(--white);
+  border-radius: var(--border-radius-sm);
+  padding: 16px;
+  text-align: center;
+  margin-top: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.monthly-payment {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.payment-details {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray);
+}
+
+.form-navigation button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.form-navigation button.back-btn {
+  background-color: var(--gray);
+  color: var(--text-color);
+}
+
+.form-navigation button.back-btn:hover {
+  background-color: #cccccc;
+}
+
+.form-navigation button.next-btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.form-navigation button.next-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.form-navigation button.submit-btn {
+  background-color: var(--accent-color);
+  color: var(--white);
+  box-shadow: var(--shadow-accent);
+}
+
+.form-navigation button.submit-btn:hover {
+  background-color: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(243, 156, 18, 0.4);
+}
+
+.form-navigation button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Form Success */
+.form-success {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: var(--success-color);
+  margin-bottom: 24px;
+}
+
+.form-success h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.form-success p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.form-success button {
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-primary);
+}
+
+.form-success button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(46, 139, 87, 0.4);
+}
+
+/* Add these styles at the end of the file, before the media queries section */
+
+.chart-container {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: var(--white);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.loan-chart-container {
+  width: 100%;
+  height: 300px;
+}
+
+.loan-chart-container h4 {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.chart-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius-sm);
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.chart-info {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* Add this to the Form Progress section */
+.progress-percentage {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Currency Input Styles */
+.currency-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-input-symbol {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 500;
+  color: var(--text-color);
+  pointer-events: none;
+}
+
+.currency-input {
+  width: 100%;
+  padding: 12px;
+  padding-left: 28px;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  transition: var(--transition);
+  color: var(--text-color);
+}
+
+.currency-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.2);
+}
+
+.currency-input.error {
+  border-color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.05);
+}
+
+.currency-input.error:focus {
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .loan-application {
+    padding: 16px;
+  }
+
+  .loan-application-header h1 {
+    font-size: 2rem;
+  }
+
+  .form-content {
+    padding: 24px 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-navigation button {
+    width: 100%;
+  }
+
+  .progress-step span:not(.step-number) {
+    display: none;
+  }
+
+  .progress-percentage {
+    position: static;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+    transform: none;
+  }
+
+  .currency-settings {
+    padding: 16px;
+  }
+
+  .currency-settings h3 {
+    font-size: 1.1rem;
+  }
+
+  .currency-settings p {
+    font-size: 0.9rem;
+  }
+}
