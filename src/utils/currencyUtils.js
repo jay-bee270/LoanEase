@@ -154,3 +154,166 @@ export const parseCurrencyInput = (currencyString) => {
   const value = Number.parseFloat(cleanedString)
   return isNaN(value) ? "" : value
 }
+
+// Add a function to get exchange rate information
+export const getExchangeRateInfo = (fromCurrency, toCurrency) => {
+  const fromRate = CURRENCIES[fromCurrency]?.exchangeRate || 1
+  const toRate = CURRENCIES[toCurrency]?.exchangeRate || 1
+
+  const rate = toRate / fromRate
+
+  return {
+    rate,
+    formattedRate: rate.toFixed(4),
+    lastUpdated: "2023-05-15", // This would be dynamic in a real application
+    source: "Example Exchange Rate API", // This would be the actual source in a real application
+  }
+}
+
+// Add a function to format currency with more options
+export const formatCurrencyWithOptions = (amount, currencyCode = "USD", options = {}) => {
+  if (amount === null || amount === undefined || isNaN(amount)) {
+    return ""
+  }
+
+  const currency = CURRENCIES[currencyCode] || CURRENCIES.USD
+
+  // Default options
+  const defaultOptions = {
+    style: "currency",
+    currency: currency.code,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    notation: options.compact ? "compact" : "standard",
+    compactDisplay: "short",
+  }
+
+  // Merge options
+  const mergedOptions = { ...defaultOptions, ...options }
+
+  try {
+    return new Intl.NumberFormat(currency.locale, mergedOptions).format(amount)
+  } catch (error) {
+    console.error("Error formatting currency:", error)
+    return `${currency.symbol}${amount.toFixed(2)}`
+  }
+}
+
+// Add a function to get currency information
+export const getCurrencyInfo = (currencyCode) => {
+  const currency = CURRENCIES[currencyCode] || CURRENCIES.USD
+
+  return {
+    ...currency,
+    formattedExample: formatCurrency(1234.56, currencyCode),
+    countries: getCountriesUsingCurrency(currencyCode),
+  }
+}
+
+// Helper function to get countries using a specific currency
+const getCountriesUsingCurrency = (currencyCode) => {
+  switch (currencyCode) {
+    case "USD":
+      return ["United States", "Ecuador", "El Salvador", "Panama"]
+    case "EUR":
+      return [
+        "Germany",
+        "France",
+        "Italy",
+        "Spain",
+        "Netherlands",
+        "Belgium",
+        "Austria",
+        "Ireland",
+        "Portugal",
+        "Finland",
+      ]
+    case "GBP":
+      return ["United Kingdom"]
+    case "NGN":
+      return ["Nigeria"]
+    case "ZAR":
+      return ["South Africa"]
+    case "KES":
+      return ["Kenya"]
+    case "EGP":
+      return ["Egypt"]
+    case "MAD":
+      return ["Morocco"]
+    case "CHF":
+      return ["Switzerland", "Liechtenstein"]
+    case "SEK":
+      return ["Sweden"]
+    default:
+      return []
+  }
+}
+
+// Add a function to get the default currency for a country
+export const getDefaultCurrencyForCountry = (countryCode) => {
+  switch (countryCode) {
+    case "US":
+      return "USD"
+    case "GB":
+      return "GBP"
+    case "CA":
+      return "USD" // Canada uses CAD but we don't have it in our list
+    case "AU":
+      return "USD" // Australia uses AUD but we don't have it in our list
+    case "DE":
+    case "FR":
+      return "EUR"
+    case "JP":
+      return "USD" // Japan uses JPY but we don't have it in our list
+    case "CN":
+      return "USD" // China uses CNY but we don't have it in our list
+    case "IN":
+      return "USD" // India uses INR but we don't have it in our list
+    case "BR":
+      return "USD" // Brazil uses BRL but we don't have it in our list
+    case "NG":
+      return "NGN"
+    case "ZA":
+      return "ZAR"
+    case "KE":
+      return "KES"
+    case "EG":
+      return "EGP"
+    case "MA":
+      return "MAD"
+    case "GH":
+      return "USD" // Ghana uses GHS but we don't have it in our list
+    case "SN":
+      return "USD" // Senegal uses XOF but we don't have it in our list
+    case "MX":
+      return "USD" // Mexico uses MXN but we don't have it in our list
+    case "AR":
+      return "USD" // Argentina uses ARS but we don't have it in our list
+    default:
+      return "USD"
+  }
+}
+
+// Add a function to get historical exchange rates (mock data)
+export const getHistoricalExchangeRates = (fromCurrency, toCurrency, days = 30) => {
+  const rates = []
+  const today = new Date()
+  const baseRate = getExchangeRateInfo(fromCurrency, toCurrency).rate
+
+  // Generate mock historical data
+  for (let i = days; i >= 0; i--) {
+    const date = new Date(today)
+    date.setDate(date.getDate() - i)
+
+    // Add some random fluctuation to the rate
+    const fluctuation = (Math.random() - 0.5) * 0.05 // +/- 2.5%
+    const rate = baseRate * (1 + fluctuation)
+
+    rates.push({
+      date: date.toISOString().split("T")[0],
+      rate: rate,
+    })
+  }
+
+  return rates
+}

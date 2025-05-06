@@ -1,0 +1,102 @@
+.country-currency-pairing {
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--gray);
+}
+
+.country-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.country-flag {
+  font-size: 1.5rem;
+}
+
+.country-name {
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.currency-suggestion {
+  background-color: rgba(243, 156, 18, 0.1);
+  border-left: 3px solid var(--accent-color);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  margin-top: 0.75rem;
+}
+
+.currency-suggestion p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.suggestion-icon {
+  margin-right: 0.5rem;
+}
+
+.suggestion-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.accept-button,
+.decline-button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.accept-button {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.accept-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.decline-button {
+  background-color: var(--gray);
+  color: var(--text-color);
+}
+
+.decline-button:hover {
+  background-color: #c5c5c5;
+}
+
+.current-currency {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.currency-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.currency-value {
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: rgba(46, 139, 87, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-sm);
+}
+
+@media (max-width: 768px) {
+  .suggestion-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

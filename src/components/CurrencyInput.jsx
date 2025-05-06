@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useCurrency } from "../contexts/CurrencyContext"
-import { formatCurrency, parseCurrencyInput } from "../utils/currencyUtils"
+import { formatCurrency, parseCurrencyInput, convertCurrency } from "../utils/currencyUtils"
 
 const CurrencyInput = ({
   value,
@@ -20,6 +20,8 @@ const CurrencyInput = ({
 }) => {
   const { currency, currencyData } = useCurrency()
   const [displayValue, setDisplayValue] = useState("")
+  const [showConversion, setShowConversion] = useState(false);
+  const [conversionValue, setConversionValue] = useState(null);
 
   // Update display value when the actual value or currency changes
   useEffect(() => {
@@ -42,6 +44,20 @@ const CurrencyInput = ({
       }
     }
   }, [value, currency])
+
+  useEffect(() => {
+    if (value !== "" && value !== null && value !== undefined) {
+      const numValue = Number.parseFloat(value);
+      if (!isNaN(numValue) && currency !== "USD") {
+        const usdValue = convertCurrency(numValue, currency, "USD");
+        setConversionValue(usdValue);
+      } else {
+        setConversionValue(null);
+      }
+    } else {
+      setConversionValue(null);
+    }
+  }, [value, currency]);
 
   const handleChange = (e) => {
     const inputValue = e.target.value
@@ -86,22 +102,32 @@ const CurrencyInput = ({
   }
 
   return (
-    <div className="currency-input-wrapper">
-      <div className="currency-input-symbol">{currencyData.symbol}</div>
-      <input
-        type="text"
-        id={id}
-        name={name}
-        value={displayValue}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        placeholder={placeholder}
-        className={`currency-input ${className}`}
-        required={required}
-        disabled={disabled}
-        inputMode="decimal"
-        {...props}
-      />
+    <div className="currency-input-container">
+      <div className="currency-input-wrapper">
+        <div className="currency-input-symbol">{currencyData.symbol}</div>
+        <input
+          type="text"
+          id={id}
+          name={name}
+          value={displayValue}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          className={`currency-input ${className}`}
+          required={required}
+          disabled={disabled}
+          inputMode="decimal"
+          onFocus={() => setShowConversion(true)}
+          onMouseEnter={() => setShowConversion(true)}
+          onMouseLeave={() => setShowConversion(false)}
+          {...props}
+        />
+      </div>
+      {showConversion && conversionValue !== null && currency !== "USD" && (
+        <div className="currency-conversion-hint">
+          ≈ {formatCurrency(conversionValue, "USD")}
+        </div>
+      )}
     </div>
   )
 }

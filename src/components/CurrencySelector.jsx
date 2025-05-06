@@ -2,16 +2,29 @@
 
 import { useState } from "react"
 import { useCurrency } from "../contexts/CurrencyContext"
-import { CURRENCY_GROUPS } from "../utils/currencyUtils"
+import { CURRENCY_GROUPS, getCurrencyInfo, getExchangeRateInfo } from "../utils/currencyUtils"
 
 const CurrencySelector = ({ className = "", compact = false }) => {
   const { currency, setCurrency, allCurrencies } = useCurrency()
   const [isOpen, setIsOpen] = useState(false)
+  const [showCurrencyInfo, setShowCurrencyInfo] = useState(false);
+  const [selectedCurrencyInfo, setSelectedCurrencyInfo] = useState(null);
 
   const handleCurrencyChange = (currencyCode) => {
     setCurrency(currencyCode)
     setIsOpen(false)
   }
+
+  const handleInfoClick = (e, currencyCode) => {
+    e.stopPropagation();
+    setSelectedCurrencyInfo(getCurrencyInfo(currencyCode));
+    setShowCurrencyInfo(true);
+  };
+
+  const handleCloseInfo = () => {
+    setShowCurrencyInfo(false);
+    setSelectedCurrencyInfo(null);
+  };
 
   return (
     <div className={`currency-selector ${className}`}>
@@ -39,8 +52,44 @@ const CurrencySelector = ({ className = "", compact = false }) => {
                   <span className="currency-symbol">{curr.symbol}</span>
                   <span className="currency-code">{curr.code}</span>
                   <span className="currency-name">{curr.name}</span>
+                  <button 
+                    className="currency-info-button"
+                    onClick={(e) => handleInfoClick(e, curr.code)}
+                    aria-label={`Information about ${curr.code}`}
+                  >
+                    ℹ️
+                  </button>
                 </button>
               ))}
+            </div>
+          )}
+
+          {showCurrencyInfo && selectedCurrencyInfo && (
+            <div className="currency-info-modal">
+              <div className="currency-info-content">
+                <button className="close-button" onClick={handleCloseInfo}>×</button>
+                <h3>{selectedCurrencyInfo.name} ({selectedCurrencyInfo.code})</h3>
+                <p><strong>Symbol:</strong> {selectedCurrencyInfo.symbol}</p>
+                <p><strong>Example:</strong> {selectedCurrencyInfo.formattedExample}</p>
+                {selectedCurrencyInfo.countries.length > 0 && (
+                  <>
+                    <p><strong>Used in:</strong></p>
+                    <ul className="currency-countries-list">
+                      {selectedCurrencyInfo.countries.map((country, index) => (
+                        <li key={index}>{country}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {currency !== "USD" && (
+                  <div className="exchange-rate-box">
+                    <p><strong>Exchange Rate:</strong></p>
+                    <p>1 {selectedCurrencyInfo.code} = {getExchangeRateInfo(selectedCurrencyInfo.code, "USD").formattedRate} USD</p>
+                    <p>1 USD = {getExchangeRateInfo("USD", selectedCurrencyInfo.code).formattedRate} {selectedCurrencyInfo.code}</p>
+                    <p className="rate-note">Rates are for demonstration purposes only</p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

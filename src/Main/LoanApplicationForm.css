@@ -64,11 +64,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Loan Application Container */
+/* Update the loan-application container to use flexbox for pushing footer to bottom */
 .loan-application {
   max-width: 1000px;
   margin: 0 auto;
   padding: 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .back-link {
@@ -117,12 +121,15 @@ body {
   margin: 0 auto;
 }
 
-/* Form Container */
+/* Ensure the form container takes up available space before the footer */
 .loan-form-container {
   background-color: var(--white);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  flex: 1;
+  margin-bottom: 0;
+  padding-bottom: 40px;
 }
 
 /* Currency Settings Section */
@@ -149,6 +156,31 @@ body {
 
 .currency-settings .currency-selector-full {
   max-width: 400px;
+}
+
+/* Currency Tools Toggle Button */
+.currency-tools-toggle {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+  display: block;
+}
+
+.currency-tools-toggle:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.currency-tools-section {
+  margin-bottom: 2rem;
 }
 
 /* Form Progress */
@@ -247,8 +279,27 @@ body {
   color: var(--text-light);
 }
 
-.form-group input,
 .form-group select,
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  transition: var(--transition);
+  color: var(--text-color);
+  background-color: var(--white);
+}
+
+.form-group select:disabled,
+.form-group input:disabled {
+  background-color: var(--gray-light);
+  cursor: not-allowed;
+}
+
+.form-group input,
 .form-group textarea {
   width: 100%;
   padding: 12px;
@@ -272,6 +323,190 @@ body {
 .form-group select.error,
 .form-group textarea.error {
   border-color: var(--error-color);
+}
+
+/* Enhanced error message styling */
+.error-message {
+  color: var(--error-color);
+  font-size: 0.75rem;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background-color: rgba(231, 76, 60, 0.1);
+  border-radius: var(--border-radius-sm);
+  border-left: 2px solid var(--error-color);
+  display: flex;
+  align-items: center;
+  animation: errorFadeIn 0.3s ease-in-out;
+}
+
+.error-message::before {
+  content: "⚠️";
+  margin-right: 6px;
+  font-size: 0.8rem;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.05);
+  box-shadow: 0 0 0 1px var(--error-color);
+}
+
+.form-group input.error:focus,
+.form-group select.error:focus,
+.form-group textarea.error:focus {
+  outline: none;
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+/* Error summary for form steps */
+.error-summary {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid var(--error-color);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius-sm);
+  animation: errorFadeIn 0.3s ease-in-out;
+}
+
+.error-summary h4 {
+  color: var(--error-color);
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.error-summary h4::before {
+  content: "⚠️";
+  margin-right: 8px;
+}
+
+.error-summary ul {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.error-summary li {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+/* Custom alert styling */
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 16px 24px;
+  z-index: 1000;
+  max-width: 90%;
+  width: 400px;
+  border-left: 4px solid var(--error-color);
+  animation: alertSlideDown 0.3s ease-in-out;
+}
+
+.custom-alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.custom-alert-title {
+  font-weight: 600;
+  color: var(--error-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-alert-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: color 0.2s ease;
+}
+
+.custom-alert-close:hover {
+  color: var(--error-color);
+}
+
+.custom-alert-message {
+  margin-bottom: 16px;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.custom-alert-button {
+  background-color: var(--error-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.custom-alert-button:hover {
+  background-color: #c0392b;
+}
+
+@keyframes alertSlideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Highlight the field with error when focused */
+.form-group:focus-within.has-error label {
+  color: var(--error-color);
+  font-weight: 500;
+}
+
+/* Add a shake animation for invalid form submissions */
+@keyframes shakeError {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.shake-error {
+  animation: shakeError 0.5s ease-in-out;
 }
 
 .error-message {
@@ -470,6 +705,10 @@ body {
 }
 
 /* Currency Input Styles */
+.currency-input-container {
+  position: relative;
+}
+
 .currency-input-wrapper {
   position: relative;
   display: flex;
@@ -510,6 +749,337 @@ body {
 
 .currency-input.error:focus {
   box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+/* Currency conversion hint */
+.currency-conversion-hint {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  font-style: italic;
+  background-color: rgba(46, 139, 87, 0.05);
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  display: inline-block;
+}
+
+/* Add styles for international phone input */
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.phone-prefix {
+  position: absolute;
+  left: 12px;
+  color: var(--text-color);
+  font-weight: 500;
+  z-index: 1;
+}
+
+input.with-prefix {
+  padding-left: 45px !important;
+}
+
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Add styles for international address fields */
+
+/* Add styles for country-specific form elements */
+.country-specific-note {
+  background-color: var(--gray-light);
+  padding: 12px;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  border-left: 3px solid var(--primary-color);
+}
+
+/* Footer styles for loan application page */
+.loan-application .footer-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-top: auto;
+}
+
+.loan-application .footer {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Add styles for the enhanced currency settings section */
+.currency-settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.currency-info {
+  background-color: rgba(46, 139, 87, 0.1);
+  border-left: 3px solid var(--primary-color);
+  padding: 12px 16px;
+  border-radius: var(--border-radius-sm);
+  margin-top: 8px;
+}
+
+.currency-note {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.exchange-rate-info {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--gray);
+}
+
+/* Add a highlight effect for the currency selector */
+.currency-settings .currency-selector {
+  transition: all 0.3s ease;
+}
+
+.currency-settings .currency-selector:hover {
+  transform: translateY(-2px);
+}
+
+.currency-settings .currency-select {
+  border-color: var(--primary-light);
+}
+
+/* Add styles for country-currency pairing */
+.country-currency-pair {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px;
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--gray);
+}
+
+.country-currency-pair .country-flag {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.country-currency-pair .country-name {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.country-currency-pair .currency-code {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Enhance the loan amount display */
+.loan-amount-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 16px;
+  background-color: var(--white);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.loan-amount-display .amount-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.loan-amount-display .amount-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Add styles for currency conversion tooltip */
+.currency-conversion-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+  cursor: help;
+}
+
+.currency-conversion-tooltip .tooltip-icon {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.currency-conversion-tooltip .tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  padding: 12px;
+  background-color: var(--white);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray);
+  font-size: 0.85rem;
+  color: var(--text-color);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.currency-conversion-tooltip:hover .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Add styles for the chart currency info */
+.chart-currency-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.chart-currency-label {
+  color: var(--text-light);
+}
+
+.chart-currency-value {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.chart-comparison-note {
+  font-style: italic;
+  color: var(--text-light);
+}
+
+.chart-comparison-info {
+  background-color: var(--gray-light);
+  padding: 8px 12px;
+  border-radius: var(--border-radius-sm);
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.chart-currency-note {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  background-color: rgba(46, 139, 87, 0.05);
+  padding: 8px;
+  border-radius: var(--border-radius-sm);
+  border-left: 3px solid var(--primary-color);
+}
+
+/* Add styles for the chart controls */
+.chart-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.comparison-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.comparison-toggle input {
+  margin: 0;
+}
+
+.toggle-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Add styles for the currency summary */
+.currency-summary {
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray);
+}
+
+.currency-summary h4 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--gray);
+  padding-bottom: 0.5rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--gray-light);
+}
+
+.summary-item:last-child {
+  margin-bottom: 1rem;
+  border-bottom: none;
+}
+
+.summary-label {
+  flex: 1;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.summary-value {
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: right;
+  margin-left: auto;
+}
+
+.summary-conversion {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-left: 1rem;
+  font-style: italic;
+}
+
+.currency-note {
+  background-color: rgba(46, 139, 87, 0.05);
+  border-left: 3px solid var(--primary-color);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  margin-top: 1rem;
+}
+
+.currency-note p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin: 0;
 }
 
 /* Responsive adjustments */
@@ -561,5 +1131,26 @@ body {
 
   .currency-settings p {
     font-size: 0.9rem;
+  }
+
+  .phone-input-container {
+    flex-direction: row;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .currency-settings-content {
+    flex-direction: column;
+  }
+
+  .country-currency-pair {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .country-currency-pair .currency-code {
+    margin-left: 0;
   }
 }

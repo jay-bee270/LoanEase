@@ -13,6 +13,7 @@ import Calculator from "../assets/calculator1.jpeg"
 import CurrencySelector from "../components/CurrencySelector"
 import { useCurrency } from "../contexts/CurrencyContext"
 import { formatCurrency } from "../utils/currencyUtils"
+import Footer from "../components/Footer"
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -28,11 +29,16 @@ const HomePage = () => {
   const testimonialsRef = useRef(null)
   const faqRef = useRef(null)
   const ctaRef = useRef(null)
+  const currencyToolsRef = useRef(null)
 
   // Handle navigation
   const handleApplyNow = () => {
     // Ensuring this function works correctly to navigate to apply page
     navigate("/apply")
+  }
+
+  const handleGoToConverter = () => {
+    navigate("/currency-converter")
   }
 
   const handleTabChange = (tab) => {
@@ -149,6 +155,17 @@ const HomePage = () => {
               </a>
               <a href="#faq" onClick={() => scrollToSection("faq")} className="nav-link">
                 <span className="nav-link-text">FAQ</span>
+              </a>
+              <a
+                href="/currency-converter"
+                onClick={(e) => {
+                  e.preventDefault()
+                  navigate("/currency-converter")
+                  handleMobileLinkClick()
+                }}
+                className="nav-link"
+              >
+                <span className="nav-link-text">Currency Converter</span>
               </a>
             </div>
 
@@ -404,6 +421,55 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Currency Tools Section */}
+      <section className="currency-tools" id="currency-tools" ref={currencyToolsRef}>
+        <div className="section-background"></div>
+        <div className="section-content">
+          <h2 className="reveal">Powerful Currency Tools</h2>
+          <p className="section-description reveal-up">
+            Make informed financial decisions with our suite of currency tools designed to help you manage international
+            finances with ease.
+          </p>
+
+          <div className="tools-grid">
+            <div className="tool-card reveal-left" style={{ transitionDelay: "0.1s" }}>
+              <div className="tool-icon">🔄</div>
+              <h3>Real-Time Currency Converter</h3>
+              <p>
+                Convert between multiple currencies with up-to-date exchange rates. Perfect for planning international
+                purchases, investments, or travel budgets.
+              </p>
+              <ul className="tool-features">
+                <li>Support for 10+ major currencies</li>
+                <li>Save recent conversions for quick reference</li>
+                <li>Track historical exchange rate trends</li>
+              </ul>
+            </div>
+
+            <div className="tool-card reveal-right" style={{ transitionDelay: "0.2s" }}>
+              <div className="tool-icon">💼</div>
+              <h3>International Loan Management</h3>
+              <p>
+                Easily manage loans in different currencies. Our tools help you understand the impact of exchange rate
+                fluctuations on your loan payments.
+              </p>
+              <ul className="tool-features">
+                <li>View loan details in your preferred currency</li>
+                <li>Calculate the effect of currency changes</li>
+                <li>Make informed refinancing decisions</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="tools-cta reveal-up" style={{ transitionDelay: "0.3s" }}>
+            <button className="cta-button" onClick={handleGoToConverter} aria-label="Try our currency converter">
+              Try Our Currency Converter
+            </button>
+            <p className="tools-cta-note">No registration required. Access all currency tools instantly.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="testimonials" id="testimonials" ref={testimonialsRef}>
         <h2 className="reveal">What Our Customers Say</h2>
@@ -414,48 +480,63 @@ const HomePage = () => {
               "The application process was incredibly simple. I got approved quickly and had the funds in my account
               within 48 hours. Highly recommend!"
             </p>
-            <div className="testimonial-author">- Deji Adepoju, Doctor, <br /> Lagos </div>
-          </div> 
+            <div className="testimonial-author">
+              - Deji Adepoju, Doctor, <br /> Lagos{" "}
+            </div>
+          </div>
           <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.2s" }}>
             <div className="testimonial-rating">★★★★★</div>
             <p className="testimonial-text">
               "I was hesitant about applying for a loan online, but LoanEase made it so easy and secure. The rates were
               better than my local bank too!"
             </p>
-            <div className="testimonial-author">- Youssef B., IT Technician, <br /> Casablanca</div>
+            <div className="testimonial-author">
+              - Youssef B., IT Technician, <br /> Casablanca
+            </div>
           </div>
           <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.3s" }}>
             <div className="testimonial-rating">★★★★★</div>
             <p className="testimonial-text">
-              Everything was done on my phone without stress. No long queues or paperwork—just straight to the point.”
+              Everything was done on my phone without stress. No long queues or paperwork—just straight to the point."
             </p>
-            <div className="testimonial-author">- James P., Engineer,<br /> London</div>
+            <div className="testimonial-author">
+              - James P., Engineer,
+              <br /> London
+            </div>
           </div>
           <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.4s" }}>
             <div className="testimonial-rating">★★★★★</div>
             <p className="testimonial-text">
-              I’ve tried other loan apps before, but this one stands out. No stress, no unnecessary documents, and the interest rates are fair
+              I've tried other loan apps before, but this one stands out. No stress, no unnecessary documents, and the
+              interest rates are fair
             </p>
-            <div className="testimonial-author">– Salisu Aliyu, Entrepreneur,<br /> Sokoto</div>
-          </div>
-           <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.5s" }}>
-            <div className="testimonial-rating">★★★★★</div>
-            <p className="testimonial-text">
-              I was in a tight spot and needed a loan fast. The application process was straightforward,
-              and the funds were available almost immediately. A real lifesaver.
-            </p>
-            <div className="testimonial-author">- Zwelethu M., Hairstylist,<br /> Cape Town
+            <div className="testimonial-author">
+              – Salisu Aliyu, Entrepreneur,
+              <br /> Sokoto
             </div>
           </div>
-              <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.6s" }}>
+          <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.5s" }}>
+            <div className="testimonial-rating">★★★★★</div>
+            <p className="testimonial-text">
+              I was in a tight spot and needed a loan fast. The application process was straightforward, and the funds
+              were available almost immediately. A real lifesaver.
+            </p>
+            <div className="testimonial-author">
+              - Zwelethu M., Hairstylist,
+              <br /> Cape Town
+            </div>
+          </div>
+          <div className="testimonial-card reveal-up" style={{ transitionDelay: "0.6s" }}>
             <div className="testimonial-rating">★★★★★</div>
             <p className="testimonial-text">
               "The loan calculator helped me understand exactly what I could afford. No surprises or hidden fees.
-              Transparent from start to finish." 
+              Transparent from start to finish."
             </p>
-            <div className="testimonial-author">- Kazi Njoroge, Fashion Designer <br /> Mombasa</div> 
+            <div className="testimonial-author">
+              - Kazi Njoroge, Fashion Designer <br /> Mombasa
+            </div>
           </div>
-          </div>
+        </div>
       </section>
       {/* FAQ Section */}
       <section className="faq" id="faq" ref={faqRef}>
@@ -504,192 +585,9 @@ const HomePage = () => {
           Start Your Application
         </button>
       </section>
+      <Footer/>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-logo">
-            <span className="logo-text">LoanEase</span>
-            <p>Simple, Fast, and Transparent Loans</p>
-          </div>
-          <div className="footer-links">
-            <div className="footer-column">
-              <h4>Products</h4>
-              <a href="#loan-types" onClick={() => scrollToSection("loan-types")}>
-                Personal Loans
-              </a>
-              <a href="#loan-types" onClick={() => scrollToSection("loan-types")}>
-                Home Loans
-              </a>
-              <a href="#loan-types" onClick={() => scrollToSection("loan-types")}>
-                Auto Loans
-              </a>
-              <a href="#loan-types" onClick={() => scrollToSection("loan-types")}>
-                Small Business Loans
-              </a>
-              <a href="#loan-types" onClick={() => scrollToSection("loan-types")}>
-                Education Loans
-              </a>
-            </div>
-            <div className="footer-column">
-              <h4>Company</h4>
-              <a href="#about">About Us</a>
-              <a href="#careers">Careers</a>
-              <a href="#press">Press</a>
-              <a href="#contact">Contact</a>
-            </div>
-            <div className="footer-column">
-              <h4>Resources</h4>
-              <a href="#blog">Blog</a>
-              <a href="#faq" onClick={() => scrollToSection("faq")}>
-                FAQ
-              </a>
-              <a href="#calculator" onClick={() => scrollToSection("calculator")}>
-                Loan Calculator
-              </a>
-              <a href="#rates">Current Rates</a>
-            </div>
-            <div className="footer-column">
-              <h4>Legal</h4>
-              <a href="#privacy">Privacy Policy</a>
-              <a href="#terms">Terms of Service</a>
-              <a href="#security">Security</a>
-              <a href="#licenses">Licenses</a>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>&copy; 2025 LoanEase. All rights reserved.</p>
-          <div className="social-links">
-             {/* Facebook */}
-    <a href="#facebook" aria-label="Facebook">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="social-icon">
-        <defs>
-          <linearGradient id="facebook-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1877F2" />
-            <stop offset="100%" stopColor="#0E5EDB" />
-          </linearGradient>
-        </defs>
-        <path
-          fill="none"
-          stroke="url(#facebook-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-        />
-      </svg>
-    </a>
-
-    {/* Twitter */}
-    <a href="#twitter" aria-label="Twitter">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="social-icon">
-        <defs>
-          <linearGradient id="twitter-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1DA1F2" />
-            <stop offset="100%" stopColor="#0D8BD9" />
-          </linearGradient>
-        </defs>
-        <path
-          fill="none"
-          stroke="url(#twitter-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
-        />
-      </svg>
-    </a>
-
-    {/* Instagram */}
-    <a href="#instagram" aria-label="Instagram">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="social-icon">
-        <defs>
-          <linearGradient id="instagram-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f09433" />
-            <stop offset="25%" stopColor="#e6683c" />
-            <stop offset="50%" stopColor="#dc2743" />
-            <stop offset="75%" stopColor="#cc2366" />
-            <stop offset="100%" stopColor="#bc1888" />
-          </linearGradient>
-        </defs>
-        <rect
-          x="2"
-          y="2"
-          width="20"
-          height="20"
-          rx="5"
-          ry="5"
-          fill="none"
-          stroke="url(#instagram-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          fill="none"
-          stroke="url(#instagram-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-        />
-        <line
-          x1="17.5"
-          y1="6.5"
-          x2="17.51"
-          y2="6.5"
-          stroke="url(#instagram-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </a>
-
-    {/* LinkedIn */}
-    <a href="#linkedin" aria-label="LinkedIn">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="social-icon">
-        <defs>
-          <linearGradient id="linkedin-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#0A66C2" />
-            <stop offset="100%" stopColor="#004182" />
-          </linearGradient>
-        </defs>
-        <path
-          fill="none"
-          stroke="url(#linkedin-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-        />
-        <rect
-          x="2"
-          y="9"
-          width="4"
-          height="12"
-          fill="none"
-          stroke="url(#linkedin-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle
-          cx="4"
-          cy="4"
-          r="2"
-          fill="none"
-          stroke="url(#linkedin-gradient)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </a>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   )
 }

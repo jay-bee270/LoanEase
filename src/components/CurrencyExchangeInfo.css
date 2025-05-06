@@ -1,0 +1,184 @@
+.currency-exchange-info {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  border: 1px solid var(--gray);
+}
+
+.exchange-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--gray);
+}
+
+.exchange-info-header h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.base-currency-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.base-currency-toggle span {
+  color: var(--text-light);
+}
+
+.base-currency-button {
+  background: none;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius-sm);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-color);
+}
+
+.base-currency-button.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+.exchange-rate-display {
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius-sm);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.current-rate {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.rate-label {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.rate-value {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.rate-updated {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.exchange-rates-list h4 {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--gray-light);
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition);
+}
+
+.rate-item:hover {
+  background-color: rgba(46, 139, 87, 0.1);
+}
+
+.rate-currency {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rate-symbol {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.rate-code {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.rate-amount {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.show-more-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: block;
+  margin: 0 auto;
+  transition: var(--transition);
+}
+
+.show-more-button:hover {
+  text-decoration: underline;
+}
+
+.exchange-rate-disclaimer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.exchange-rate-disclaimer p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .exchange-info-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .rates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .current-rate {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rate-updated {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

@@ -1,0 +1,98 @@
+.loan-currency-comparison {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray);
+}
+
+.loan-currency-comparison h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.comparison-description {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.comparison-table {
+  width: 100%;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--gray);
+  margin-bottom: 1.5rem;
+}
+
+.comparison-header {
+  display: flex;
+  background-color: var(--gray-light);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.comparison-row {
+  display: flex;
+  border-top: 1px solid var(--gray);
+}
+
+.comparison-row.current-currency-row {
+  background-color: rgba(46, 139, 87, 0.05);
+}
+
+.comparison-cell {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: right;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.comparison-cell.header-cell {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.comparison-cell.currency-cell {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.currency-code {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.currency-note {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.comparison-disclaimer {
+  background-color: var(--gray-light);
+  padding: 1rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.comparison-disclaimer p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .comparison-table {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .comparison-header,
+  .comparison-row {
+    min-width: 700px;
+  }
+}
